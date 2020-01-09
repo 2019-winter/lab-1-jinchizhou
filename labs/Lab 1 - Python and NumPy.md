@@ -13,8 +13,7 @@ jupyter:
     name: python3
 ---
 
-# Name(s)
-**PUT YOUR FULL NAME(S) HERE**
+Jinchi Zhou
 
 
 **Instructions:** This is an individual assignment, but you may discuss your code with your neighbors.
@@ -36,7 +35,7 @@ Please read and reference the following as your progress through this course.
 **In the space provided below, what are three things that still remain unclear or need further explanation?**
 
 
-**YOUR ANSWER HERE**
+Will we be using simple panda commands? I think that is more of data manipulation rather than analyzing. 
 
 
 ## Exercises 1-7
@@ -46,46 +45,73 @@ For the following exercises please read the Python appendix in the Marsland text
 ## Exercise 1
 
 ```python
-# YOUR SOLUTION HERE
-#a=1000
-print('this is my answer',a+1) 
+import numpy as np
+a = np.full((6, 4), 2)
+print(a)
 ```
 
 ## Exercise 2
 
 ```python
-# YOUR SOLUTION HERE
-a=2000
+b = np.full((6, 4), 1)
+np.fill_diagonal(b, 3)
+print(b)
 ```
 
 ## Exercise 3
 
 ```python
-# YOUR SOLUTION HERE
+print(a*b)
+# Dot uses Matrix multiplication. (6x4) * (6x4) doesn't work
 ```
 
 ## Exercise 4
 
 ```python
-# YOUR SOLUTION HERE
+print(a.transpose())
+
+print(np.dot(a.transpose(), b)) # (4x6) * (6x4) = (4x4)
+print(np.dot(a, b.transpose())) # (6x4) * (4x6) = (6x6)
 ```
 
 ## Exercise 5
 
 ```python
-# YOUR SOLUTION HERE
+
+def rando(a):
+    print(a);
+        
+array = np.array([5, 6, 7]);
+rando(array)
 ```
 
 ## Exercise 6
 
 ```python
-# YOUR SOLUTION HERE
+arr = np.random.random(10)
+print(arr)
+
+print("Sum is", np.sum(arr)) # sum
+print("Mean is", np.mean(arr)) # Mean
+print("Median is", np.median(arr)) # Median
+
 ```
 
 ## Exercise 7
 
 ```python
-# YOUR SOLUTION HERE
+c = np.full((6, 7), 1)
+
+def countOnes(array):
+    ct = 0;
+    for i in range(len(array)):
+        for j in range(len(array[0])):
+            if (array[i][j] == 1):
+                ct+=1;
+                
+    return ct
+
+print(countOnes(c))
 ```
 
 ## Excercises 8-???
@@ -96,28 +122,36 @@ While the Marsland book avoids using another popular package called Pandas, we w
 Repeat exercise A.1 from Marsland, but create a Pandas DataFrame instead of a NumPy array.
 
 ```python
-# YOUR SOLUTION HERE
+import pandas as pd
+dfA = pd.DataFrame(np.full((6, 4), 2))
+print(dfA)
 ```
 
 ## Exercise 9
 Repeat exercise A.2 using a DataFrame instead.
 
 ```python
-# YOUR SOLUTION HERE
+dfB = pd.DataFrame(np.full((6, 4), 1))
+
+np.fill_diagonal(dfB.values, 3)
+dfB
 ```
 
 ## Exercise 10
 Repeat exercise A.3 using DataFrames instead.
 
 ```python
-# YOUR SOLUTION HERE
+dfC = dfA.multiply(dfB)
+dfC
 ```
 
 ## Exercise 11
 Repeat exercise A.7 using a dataframe.
 
 ```python
-# YOUR SOLUTION HERE
+df2 = pd.DataFrame(np.array([[1, 2, 3], [4, 1, 6], [7, 8, 9]]))
+
+countOnes(df2)
 ```
 
 ## Exercises 12-14
@@ -137,22 +171,24 @@ Notice how we have nice headers and mixed datatypes? That is one of the reasons 
 How do you select the ``name`` column without using .iloc?
 
 ```python
-## YOUR SOLUTION HERE
+titanic_df['name']
 ```
 
 ## Exercise 13
 After setting the index to ``sex``, how do you select all passengers that are ``female``? And how many female passengers are there?
 
 ```python
-## YOUR SOLUTION HERE
-titanic_df.set_index('sex',inplace=True)
+# titanic_df.set_index('sex',inplace=True)
+titanic_df.groupby('sex').sum()
+
+# THere are 1004 female passengers
 ```
 
 ## Exercise 14
 How do you reset the index?
 
 ```python
-## YOUR SOLUTION HERE
+
 ```
 
 ```python
